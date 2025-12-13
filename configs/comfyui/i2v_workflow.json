@@ -1,0 +1,70 @@
+{
+  "workflow_info": {
+    "name": "HunyuanVideo I2V with LoRA",
+    "description": "Character-consistent video generation workflow",
+    "version": "1.0"
+  },
+  "nodes": {
+    "1": {
+      "type": "LoadImage",
+      "inputs": {
+        "image_path": "input.jpg"
+      }
+    },
+    "2": {
+      "type": "LoadHunyuanModel",
+      "inputs": {
+        "model_path": "models/hunyuan"
+      }
+    },
+    "3": {
+      "type": "LoadLoRA",
+      "inputs": {
+        "lora_path": "models/lora/character1",
+        "strength": 0.8
+      }
+    },
+    "4": {
+      "type": "ApplyLoRA",
+      "inputs": {
+        "model": ["2", 0],
+        "lora": ["3", 0]
+      }
+    },
+    "5": {
+      "type": "TextPrompt",
+      "inputs": {
+        "text": "A person walking in a park, cinematic"
+      }
+    },
+    "6": {
+      "type": "I2VGenerate",
+      "inputs": {
+        "model": ["4", 0],
+        "image": ["1", 0],
+        "prompt": ["5", 0],
+        "num_frames": 16,
+        "fps": 8,
+        "guidance_scale": 7.5,
+        "num_inference_steps": 50,
+        "seed": 42
+      }
+    },
+    "7": {
+      "type": "SaveVideo",
+      "inputs": {
+        "video": ["6", 0],
+        "output_path": "output.mp4",
+        "fps": 8
+      }
+    }
+  },
+  "connections": [
+    ["1", 0, "6", 0],
+    ["2", 0, "4", 0],
+    ["3", 0, "4", 1],
+    ["4", 0, "6", 1],
+    ["5", 0, "6", 2],
+    ["6", 0, "7", 0]
+  ]
+}

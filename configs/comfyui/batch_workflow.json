@@ -1,0 +1,62 @@
+{
+  "workflow_info": {
+    "name": "Batch Video Generation",
+    "description": "Generate multiple videos from a list of images",
+    "version": "1.0"
+  },
+  "nodes": {
+    "1": {
+      "type": "BatchLoadImages",
+      "inputs": {
+        "image_dir": "inputs/images",
+        "pattern": "*.jpg"
+      }
+    },
+    "2": {
+      "type": "LoadHunyuanModel",
+      "inputs": {
+        "model_path": "models/hunyuan"
+      }
+    },
+    "3": {
+      "type": "LoadLoRA",
+      "inputs": {
+        "lora_path": "models/lora/character1",
+        "strength": 0.8
+      }
+    },
+    "4": {
+      "type": "ApplyLoRA",
+      "inputs": {
+        "model": ["2", 0],
+        "lora": ["3", 0]
+      }
+    },
+    "5": {
+      "type": "LoadPrompts",
+      "inputs": {
+        "prompts_file": "prompts.txt"
+      }
+    },
+    "6": {
+      "type": "BatchI2VGenerate",
+      "inputs": {
+        "model": ["4", 0],
+        "images": ["1", 0],
+        "prompts": ["5", 0],
+        "num_frames": 16,
+        "fps": 8,
+        "guidance_scale": 7.5,
+        "num_inference_steps": 50
+      }
+    },
+    "7": {
+      "type": "BatchSaveVideos",
+      "inputs": {
+        "videos": ["6", 0],
+        "output_dir": "outputs/videos",
+        "fps": 8
+      }
+    }
+  }
+}
