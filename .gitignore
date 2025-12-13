@@ -144,9 +144,9 @@ logs/
 *.pt
 *.bin
 
-# ComfyUI
-comfyui/
-ComfyUI/
+# ComfyUI (installed instance)
+/comfyui/
+/ComfyUI/
 
 # Temporary files
 tmp/
