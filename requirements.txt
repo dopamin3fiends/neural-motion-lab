@@ -1,0 +1,41 @@
+# Core Dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+pillow>=10.0.0
+
+# Model and Training
+transformers>=4.30.0
+diffusers>=0.27.0
+accelerate>=0.20.0
+peft>=0.5.0
+safetensors>=0.3.0
+
+# Configuration
+pyyaml>=6.0
+omegaconf>=2.3.0
+
+# Data Processing
+opencv-python>=4.8.0
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.9
+av>=10.0.0
+
+# Utilities
+tqdm>=4.65.0
+requests>=2.31.0
+huggingface-hub>=0.16.0
+einops>=0.7.0
+
+# Monitoring and Logging
+tensorboard>=2.13.0
+wandb>=0.15.0
+
+# Development
+pytest>=7.4.0
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+
+# ComfyUI Integration
+aiohttp>=3.8.0

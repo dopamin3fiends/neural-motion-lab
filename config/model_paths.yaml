@@ -1,0 +1,89 @@
+# Model Paths Configuration for Neural Motion Lab
+
+# Base Model Paths
+base_model:
+  # HunyuanVideo Model
+  hunyuan_video:
+    huggingface_id: "tencent/HunyuanVideo"
+    local_path: "models/hunyuan_video"
+    variant: "fp16"  # fp32, fp16, bf16
+  
+  # VAE (Variational Autoencoder)
+  vae:
+    huggingface_id: "stabilityai/sd-vae-ft-mse"
+    local_path: "models/vae"
+  
+  # Text Encoder
+  text_encoder:
+    huggingface_id: "openai/clip-vit-large-patch14"
+    local_path: "models/text_encoder"
+
+# LoRA Paths
+lora:
+  # Custom LoRA Models Directory
+  custom_dir: "lora"
+  
+  # Example LoRA Paths (add your own)
+  models:
+    # character_style:
+    #   path: "lora/character_style.safetensors"
+    #   weight: 0.8
+    # animation_style:
+    #   path: "lora/animation_style.safetensors"
+    #   weight: 0.6
+
+# ComfyUI Paths
+comfyui:
+  install_dir: "ComfyUI"
+  models_dir: "ComfyUI/models"
+  custom_nodes_dir: "ComfyUI/custom_nodes"
+  
+  # Model Subdirectories in ComfyUI
+  checkpoints: "ComfyUI/models/checkpoints"
+  loras: "ComfyUI/models/loras"
+  vae: "ComfyUI/models/vae"
+  embeddings: "ComfyUI/models/embeddings"
+
+# Dataset Paths
+datasets:
+  training: "data/training"
+  validation: "data/validation"
+  test: "data/test"
+
+# Output Paths
+outputs:
+  generated_videos: "outputs/videos"
+  training_outputs: "outputs/training"
+  validation_outputs: "outputs/validation"
+  logs: "logs"
+  tensorboard: "logs/tensorboard"
+
+# Cache Paths
+cache:
+  huggingface: ".cache/huggingface"
+  torch: ".cache/torch"
+  models: ".cache/models"
+
+# Download Configuration
+download:
+  # Auto-download missing models
+  auto_download: true
+  
+  # Use HuggingFace Hub
+  use_auth_token: false
+  auth_token: null  # Set HF_TOKEN environment variable instead
+  
+  # Download settings
+  resume_download: true
+  force_download: false
+  local_files_only: false
+
+# Platform-Specific Settings
+platform:
+  # Windows optimizations
+  use_pathlib: true
+  path_separator: "auto"  # auto, /, \\
+  
+  # CUDA settings
+  cuda_device: 0
+  cuda_visible_devices: null  # null for all devices
