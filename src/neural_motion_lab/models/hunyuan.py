@@ -1,5 +1,9 @@
 """
 HunyuanVideo-I2V Model implementation.
+
+NOTE: This is a template implementation. The actual model loading and inference
+logic should be implemented based on the HunyuanVideo API/SDK. The current
+implementation provides the structure and interface that the pipeline expects.
 """
 
 from typing import Dict, Any, Optional, List
@@ -27,8 +31,17 @@ class HunyuanModel:
         self.model = None
         
     def load(self) -> None:
-        """Load the HunyuanVideo model."""
-        # TODO: Implement actual model loading
+        """
+        Load the HunyuanVideo model.
+        
+        NOTE: This is a placeholder implementation. In production, this should:
+        - Load the HunyuanVideo model weights and configuration
+        - Initialize the model on the specified device
+        - Set up the model for inference mode
+        
+        Refer to HunyuanVideo documentation for actual implementation.
+        """
+        # TODO: Implement actual model loading using HunyuanVideo SDK
         print(f"Loading HunyuanVideo model from {self.model_path} on {self.device}")
         
     def generate(
@@ -42,6 +55,11 @@ class HunyuanModel:
         """
         Generate video from input image.
         
+        NOTE: This is a placeholder implementation. In production, this should:
+        - Preprocess the input image
+        - Run the HunyuanVideo I2V inference
+        - Postprocess and return the generated video frames
+        
         Args:
             input_image: Input image array
             prompt: Text prompt for generation
@@ -52,7 +70,7 @@ class HunyuanModel:
         Returns:
             Generated video as numpy array
         """
-        # TODO: Implement actual video generation
+        # TODO: Implement actual video generation using HunyuanVideo API
         print(f"Generating {num_frames} frames at {fps} fps")
         print(f"Prompt: {prompt}")
         return np.zeros((num_frames, *input_image.shape))
@@ -61,8 +79,13 @@ class HunyuanModel:
         """
         Set LoRA model for character consistency.
         
+        NOTE: This is a placeholder implementation. In production, this should:
+        - Apply the LoRA model to the HunyuanVideo base model
+        - Configure LoRA parameters and scaling
+        - Ensure compatibility between LoRA and base model
+        
         Args:
             lora_model: LoRA model to apply
         """
-        # TODO: Implement LoRA integration
+        # TODO: Implement LoRA integration with HunyuanVideo
         print("Setting LoRA model for character consistency")

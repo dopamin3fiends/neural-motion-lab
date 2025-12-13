@@ -70,12 +70,32 @@ class ComfyUIPipeline:
         if not self.workflow:
             raise ValueError("No workflow loaded")
             
-        # TODO: Implement workflow parameter update logic
-        self.workflow.update(params)
+        # Perform deep merge of parameters
+        self._deep_merge(self.workflow, params)
+        
+    def _deep_merge(self, base: Dict[str, Any], update: Dict[str, Any]) -> None:
+        """
+        Recursively merge update dictionary into base dictionary.
+        
+        Args:
+            base: Base dictionary to update
+            update: Dictionary with updates to apply
+        """
+        for key, value in update.items():
+            if key in base and isinstance(base[key], dict) and isinstance(value, dict):
+                self._deep_merge(base[key], value)
+            else:
+                base[key] = value
         
     def execute(self, server_url: str = "http://127.0.0.1:8188") -> Dict[str, Any]:
         """
         Execute the workflow on a ComfyUI server.
+        
+        NOTE: This is a placeholder implementation. In production, this should:
+        - Send the workflow to the ComfyUI server via its API
+        - Monitor the execution progress
+        - Handle errors and retries
+        - Return the results including output paths
         
         Args:
             server_url: URL of the ComfyUI server
@@ -86,6 +106,7 @@ class ComfyUIPipeline:
         if not self.workflow:
             raise ValueError("No workflow loaded")
             
-        # TODO: Implement actual ComfyUI API call
+        # TODO: Implement actual ComfyUI API call using websockets/HTTP
+        # Example: POST to /prompt endpoint with the workflow
         print(f"Executing workflow on {server_url}")
         return {"status": "success", "message": "Workflow executed"}
