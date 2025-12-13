@@ -1,0 +1,55 @@
+# Example Prompts
+
+## Character Motion
+
+```
+A person walking forward, smooth motion, cinematic lighting
+A person turning around, natural movement
+A person waving hello, friendly gesture
+A person nodding in agreement, subtle motion
+A person smiling and looking at camera
+```
+
+## Scene Actions
+
+```
+A person walking in a beautiful garden, spring day
+A person standing in the rain, dramatic lighting
+A person dancing, energetic movement, party scene
+A person reading a book, peaceful atmosphere
+A person drinking coffee, morning scene
+```
+
+## Camera Movements
+
+```
+Close-up of a person's face, slow zoom in
+A person walking away, camera following
+Wide shot of a person in a landscape, cinematic
+Over-the-shoulder view of a person looking ahead
+```
+
+## Styles
+
+```
+Cinematic style, film grain, dramatic lighting
+Anime style, vibrant colors, smooth animation
+Realistic style, natural lighting, 4K quality
+Vintage style, retro colors, film aesthetic
+```
+
+## Advanced Prompts
+
+```
+A person walking through a crowded street, neon lights, cyberpunk style, night scene
+A professional portrait shot with a person slowly turning their head, studio lighting, high quality
+A person performing a traditional dance, cultural attire, outdoor temple setting, golden hour
+```
+
+## Tips
+
+1. Be specific about the motion you want
+2. Include style and lighting descriptors
+3. Mention the scene context
+4. Use quality modifiers (cinematic, high quality, 4K)
+5. Specify camera angles if needed

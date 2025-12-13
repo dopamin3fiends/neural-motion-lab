@@ -1,0 +1,52 @@
+# Pipeline Configuration
+# This file configures the video generation pipeline
+
+pipeline:
+  hunyuan_model_path: "models/hunyuan"
+  lora_model_path: "models/lora/character1"
+  device: "cuda"  # cuda or cpu
+
+models:
+  hunyuan:
+    precision: "fp16"  # fp32, fp16, or int8
+    compile: false  # Enable torch.compile (PyTorch 2.0+)
+    
+  lora:
+    enabled: true
+    scale: 0.8  # LoRA weight scale (0.0 - 1.0)
+
+generation:
+  # Video parameters
+  num_frames: 16
+  fps: 8
+  width: 512
+  height: 512
+  
+  # Generation quality
+  guidance_scale: 7.5  # 1.0 - 20.0
+  num_inference_steps: 50  # 20 - 100
+  
+  # Advanced settings
+  scheduler: "ddim"  # ddim, pndm, euler, etc.
+  eta: 0.0
+
+optimization:
+  # Memory optimization
+  enable_attention_slicing: true
+  enable_vae_slicing: true
+  enable_cpu_offload: false
+  
+  # Speed optimization
+  enable_xformers: true
+  enable_flash_attention: false
+
+batch:
+  # Batch processing settings
+  batch_size: 1
+  num_workers: 4
+
+output:
+  # Output settings
+  output_dir: "outputs/videos"
+  save_format: "mp4"  # mp4, gif, frames
+  quality: "high"  # low, medium, high

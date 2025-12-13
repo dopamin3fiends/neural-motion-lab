@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  neural-motion-lab:
+    build: .
+    image: neural-motion-lab:latest
+    container_name: neural-motion-lab
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./models:/app/models
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+      - ./configs:/app/configs
+    working_dir: /app
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+
+  comfyui:
+    build: .
+    image: neural-motion-lab:latest
+    container_name: neural-motion-lab-comfyui
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./models:/app/models
+      - ./outputs:/app/outputs
+      - ./comfyui:/app/comfyui
+    working_dir: /app/comfyui
+    command: python main.py --listen 0.0.0.0
