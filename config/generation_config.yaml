@@ -1,0 +1,67 @@
+# Video Generation Configuration for Neural Motion Lab
+
+# Model Configuration
+model:
+  name: "HunyuanVideo-I2V"
+  precision: "fp16"  # fp32, fp16, or bf16
+  device: "cuda"     # cuda, cpu
+  offload_to_cpu: false
+  sequential_offload: false
+
+# Generation Parameters
+generation:
+  # Video Settings
+  num_frames: 49          # Number of frames to generate
+  fps: 24                 # Frames per second
+  width: 512              # Video width (must be divisible by 8)
+  height: 512             # Video height (must be divisible by 8)
+  
+  # Sampling Settings
+  num_inference_steps: 50 # Number of denoising steps
+  guidance_scale: 7.5     # Classifier-free guidance scale
+  scheduler: "euler_a"    # Scheduler type: euler, euler_a, ddim, pndm
+  
+  # Seed and Reproducibility
+  seed: null              # Random seed (null for random)
+  deterministic: false    # Enable deterministic mode
+  
+  # LoRA Settings
+  lora_scale: 0.8         # LoRA weight multiplier (0.0 to 1.5)
+  lora_paths: []          # List of LoRA checkpoint paths
+  
+  # Advanced Settings
+  eta: 0.0                # DDIM eta parameter
+  clip_skip: 0            # Number of CLIP layers to skip
+  
+# Prompt Configuration
+prompt:
+  positive: ""            # Positive prompt
+  negative: ""            # Negative prompt
+  max_length: 77          # Maximum prompt tokens
+
+# Input/Output Configuration
+io:
+  input_image: null       # Path to input image
+  output_dir: "outputs"   # Output directory
+  output_format: "mp4"    # Output format: mp4, avi, gif
+  save_frames: false      # Save individual frames
+  
+# Batch Processing
+batch:
+  enabled: false
+  batch_size: 1
+  input_dir: null
+  output_dir: "outputs/batch"
+
+# Performance Optimization
+optimization:
+  enable_xformers: true     # Use xFormers memory efficient attention
+  enable_vae_tiling: false  # Use VAE tiling for large resolutions
+  enable_slicing: false     # Use attention slicing
+  vae_batch_size: 8         # VAE decode batch size
+  
+# Logging
+logging:
+  level: "INFO"           # DEBUG, INFO, WARNING, ERROR
+  save_config: true       # Save config with outputs
+  log_dir: "logs"

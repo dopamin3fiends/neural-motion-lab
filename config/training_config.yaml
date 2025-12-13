@@ -1,0 +1,117 @@
+# LoRA Training Configuration for Neural Motion Lab
+
+# Model Configuration
+model:
+  base_model: "HunyuanVideo-I2V"
+  precision: "fp16"        # fp32, fp16, bf16
+  gradient_checkpointing: true
+  
+# LoRA Configuration
+lora:
+  rank: 32                 # LoRA rank (4, 8, 16, 32, 64, 128)
+  alpha: 32                # LoRA alpha (typically same as rank)
+  dropout: 0.0             # LoRA dropout
+  target_modules:          # Modules to apply LoRA
+    - "to_q"
+    - "to_k"
+    - "to_v"
+    - "to_out.0"
+  bias: "none"             # Bias training: none, all, lora_only
+
+# Training Configuration
+training:
+  # Basic Settings
+  output_dir: "lora/trained"
+  num_epochs: 10
+  batch_size: 1            # Per-device batch size
+  gradient_accumulation_steps: 4
+  
+  # Learning Rate
+  learning_rate: 1e-4
+  lr_scheduler: "cosine"   # constant, linear, cosine, polynomial
+  lr_warmup_steps: 100
+  
+  # Optimizer
+  optimizer: "adamw"       # adamw, adam, sgd
+  weight_decay: 0.01
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1e-8
+  max_grad_norm: 1.0       # Gradient clipping
+  
+  # Mixed Precision
+  mixed_precision: "fp16"  # no, fp16, bf16
+  
+  # Checkpointing
+  save_steps: 500
+  save_total_limit: 5      # Keep only last N checkpoints
+  resume_from_checkpoint: null
+  
+  # Logging
+  logging_steps: 10
+  log_level: "INFO"
+  report_to: ["tensorboard"]  # tensorboard, wandb, none
+
+# Data Configuration
+data:
+  # Dataset
+  dataset_dir: "data/training"
+  image_column: "image"
+  caption_column: "text"
+  
+  # Preprocessing
+  resolution: 512          # Training resolution
+  center_crop: true
+  random_flip: true
+  
+  # Dataloader
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+# Validation Configuration
+validation:
+  enabled: true
+  validation_steps: 500
+  num_validation_images: 4
+  validation_prompt: "a character standing, high quality"
+  validation_negative_prompt: "blurry, low quality"
+  num_inference_steps: 25
+  guidance_scale: 7.5
+
+# Hardware Optimization
+optimization:
+  # Memory
+  enable_xformers: true
+  gradient_checkpointing: true
+  use_8bit_adam: false     # Use bitsandbytes 8-bit Adam
+  
+  # Performance
+  tf32: true               # Use TF32 on Ampere GPUs
+  dataloader_num_workers: 4
+  
+  # VRAM Optimization
+  vae_batch_size: 4
+  text_encoder_batch_size: 4
+
+# Advanced Settings
+advanced:
+  seed: 42
+  max_train_samples: null  # Limit training samples (null for all)
+  max_steps: null          # Override num_epochs (null to use epochs)
+  checkpointing_steps: 500
+  validation_epochs: 1
+  
+  # Text Encoder
+  train_text_encoder: false
+  text_encoder_lr: 5e-6
+  
+  # Noise
+  noise_offset: 0.0        # Add noise offset for better contrast
+  input_perturbation: 0.0  # Add input perturbation
+
+# Output Configuration
+output:
+  push_to_hub: false
+  hub_model_id: null
+  hub_token: null

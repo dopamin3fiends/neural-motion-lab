@@ -1,0 +1,104 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyTorch
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Models (large files)
+models/*.pt
+models/*.pth
+models/*.ckpt
+models/*.safetensors
+models/*.bin
+models/hunyuan*/
+models/vae*/
+models/text_encoder*/
+!models/README.md
+!models/.gitkeep
+
+# LoRA weights
+lora/*.pt
+lora/*.pth
+lora/*.safetensors
+!lora/README.md
+!lora/.gitkeep
+
+# Generated content
+assets/examples/input_images/*
+assets/examples/output_videos/*
+assets/screenshots/*
+!assets/examples/input_images/.gitkeep
+!assets/examples/output_videos/.gitkeep
+!assets/screenshots/.gitkeep
+outputs/
+generated/
+*.mp4
+*.avi
+*.mov
+*.gif
+
+# Logs
+logs/
+*.log
+
+# ComfyUI
+ComfyUI/
+custom_nodes/
+!workflows/
+
+# Cache
+.cache/
+wandb/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Environment
+.env
+.env.local
+secrets.yaml
