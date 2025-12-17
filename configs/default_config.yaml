@@ -1,0 +1,62 @@
+# Neural Motion Lab - Default Configuration
+
+# Model Paths
+models:
+  hunyuan_video: "models/checkpoints/hunyuan_video_720_cfgdistill.safetensors"
+  clip: "models/clip/llava_llama3_fp16.safetensors"
+  vae: "models/vae/hunyuan_video_vae_fp16.safetensors"
+  lora_directory: "models/loras/"
+  controlnet_directory: "models/controlnet/"
+  ipadapter_directory: "models/ipadapter/"
+
+# Video Generation Settings
+video:
+  resolution:
+    width: 1280
+    height: 720
+  frame_rate: 24
+  duration_seconds: 4
+  total_frames: 96
+
+# Sampling Settings
+sampling:
+  steps: 25
+  cfg_scale: 6.0
+  sampler: "dpmpp_2m"
+  scheduler: "karras"
+  denoise: 1.0
+  seed: 42
+  seed_mode: "fixed"  # options: fixed, random, incremental
+
+# Default Prompts
+prompts:
+  positive: "A person walking forward, natural movement, smooth motion, high quality"
+  negative: "blurry, low quality, distorted, artifacts, inconsistent"
+
+# Memory Optimization
+memory:
+  enable_attention_slicing: true
+  enable_vae_slicing: true
+  enable_cpu_offload: false
+  use_fp16: true
+  use_tf32: true
+
+# Output Settings
+output:
+  directory: "outputs/"
+  format: "mp4"
+  codec: "h264"
+  save_intermediate_frames: false
+  filename_prefix: "nml_output"
+
+# Workflow Settings
+workflow:
+  auto_queue: false
+  batch_size: 1
+  enable_preview: true
+
+# Advanced Settings
+advanced:
+  enable_xformers: true
+  gradient_checkpointing: false
+  max_memory_usage_gb: 24

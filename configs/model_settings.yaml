@@ -1,0 +1,181 @@
+# Neural Motion Lab - Model-Specific Settings
+
+# HunyuanVideo Model Settings
+hunyuan_video:
+  model_name: "hunyuan_video_720_cfgdistill"
+  precision: "fp16"  # options: fp32, fp16, bf16
+  
+  # Resolution Presets
+  resolutions:
+    sd_480p:
+      width: 854
+      height: 480
+      recommended_vram: 8
+    hd_720p:
+      width: 1280
+      height: 720
+      recommended_vram: 12
+    fhd_1080p:
+      width: 1920
+      height: 1080
+      recommended_vram: 24
+    custom:
+      width: 1280
+      height: 720
+      recommended_vram: 12
+  
+  # Frame Settings
+  frames:
+    min: 16
+    max: 120
+    default: 96
+    recommended_24fps: 96  # 4 seconds
+    recommended_30fps: 120  # 4 seconds
+  
+  # Sampling Parameters
+  sampling:
+    steps:
+      min: 15
+      max: 50
+      default: 25
+      quality_recommended: 30
+      speed_recommended: 20
+    
+    cfg_scale:
+      min: 1.0
+      max: 15.0
+      default: 6.0
+      recommended_range: [5.0, 8.0]
+    
+    denoise:
+      min: 0.0
+      max: 1.0
+      default: 1.0
+      img2img_recommended: [0.7, 0.9]
+
+# VAE Settings
+vae:
+  model_name: "hunyuan_video_vae_fp16"
+  precision: "fp16"
+  tile_size: 512
+  enable_tiling: true
+  color_fix: false
+
+# CLIP Settings
+clip:
+  model_name: "llava_llama3_fp16"
+  type: "sd3"
+  precision: "fp16"
+  max_token_length: 77
+  skip_clip_layers: 0
+
+# Memory Management by VRAM Size
+memory_profiles:
+  low_vram_8gb:
+    resolution: "sd_480p"
+    max_frames: 48
+    enable_attention_slicing: true
+    enable_vae_slicing: true
+    enable_cpu_offload: true
+    batch_size: 1
+    
+  medium_vram_12gb:
+    resolution: "hd_720p"
+    max_frames: 96
+    enable_attention_slicing: true
+    enable_vae_slicing: true
+    enable_cpu_offload: false
+    batch_size: 1
+  
+  high_vram_24gb:
+    resolution: "fhd_1080p"
+    max_frames: 120
+    enable_attention_slicing: false
+    enable_vae_slicing: false
+    enable_cpu_offload: false
+    batch_size: 1
+  
+  ultra_vram_40gb:
+    resolution: "fhd_1080p"
+    max_frames: 240
+    enable_attention_slicing: false
+    enable_vae_slicing: false
+    enable_cpu_offload: false
+    batch_size: 2
+
+# Sampler Settings
+samplers:
+  dpmpp_2m:
+    description: "DPM++ 2M - Balanced quality and speed"
+    recommended_steps: 25
+    recommended_cfg: 6.0
+  
+  dpmpp_sde:
+    description: "DPM++ SDE - Higher quality, slower"
+    recommended_steps: 30
+    recommended_cfg: 7.0
+  
+  euler_a:
+    description: "Euler Ancestral - Fast, creative"
+    recommended_steps: 20
+    recommended_cfg: 6.5
+  
+  ddim:
+    description: "DDIM - Stable, predictable"
+    recommended_steps: 30
+    recommended_cfg: 7.5
+
+# Scheduler Settings
+schedulers:
+  karras:
+    description: "Karras - Recommended for most cases"
+  
+  exponential:
+    description: "Exponential - Smoother results"
+  
+  normal:
+    description: "Normal - Standard linear schedule"
+  
+  simple:
+    description: "Simple - Fast, basic schedule"
+
+# Performance Optimization
+optimization:
+  auto_detect_settings: true
+  benchmark_mode: false
+  
+  cuda_settings:
+    allow_tf32: true
+    allow_fp16_reduced_precision_reduction: true
+    benchmark_cudnn: false
+    deterministic_algorithms: false
+  
+  compile_settings:
+    enable_torch_compile: false
+    compile_mode: "default"  # options: default, reduce-overhead, max-autotune
+
+# Quality Settings by Use Case
+use_case_presets:
+  preview:
+    steps: 15
+    cfg_scale: 5.0
+    resolution: "sd_480p"
+    frames: 48
+  
+  standard:
+    steps: 25
+    cfg_scale: 6.0
+    resolution: "hd_720p"
+    frames: 96
+  
+  high_quality:
+    steps: 35
+    cfg_scale: 7.0
+    resolution: "hd_720p"
+    frames: 120
+  
+  production:
+    steps: 40
+    cfg_scale: 7.5
+    resolution: "fhd_1080p"
+    frames: 120

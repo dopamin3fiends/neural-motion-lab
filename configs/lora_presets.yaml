@@ -1,0 +1,143 @@
+# Neural Motion Lab - LoRA Presets
+
+# Character Consistency Presets
+character_consistency:
+  basic:
+    lora: "character_consistency_lora.safetensors"
+    strength_model: 0.85
+    strength_clip: 0.85
+    description: "Basic character consistency for maintaining features"
+  
+  strong:
+    lora: "character_consistency_lora.safetensors"
+    strength_model: 1.0
+    strength_clip: 1.0
+    description: "Strong character consistency for detailed preservation"
+  
+  subtle:
+    lora: "character_consistency_lora.safetensors"
+    strength_model: 0.6
+    strength_clip: 0.6
+    description: "Subtle character hints while allowing variation"
+
+# Style Presets
+styles:
+  anime:
+    lora: "style_anime_lora.safetensors"
+    strength_model: 0.7
+    strength_clip: 0.7
+    description: "Anime/manga art style"
+    suggested_prompt: "anime style, vibrant colors, expressive"
+  
+  realistic:
+    lora: "style_realistic_lora.safetensors"
+    strength_model: 0.8
+    strength_clip: 0.8
+    description: "Photorealistic style"
+    suggested_prompt: "photorealistic, detailed, natural lighting"
+  
+  artistic:
+    lora: "style_artistic_lora.safetensors"
+    strength_model: 0.75
+    strength_clip: 0.75
+    description: "Artistic/painterly style"
+    suggested_prompt: "artistic, painterly, creative composition"
+  
+  cinematic:
+    lora: "style_cinematic_lora.safetensors"
+    strength_model: 0.8
+    strength_clip: 0.8
+    description: "Cinematic film style"
+    suggested_prompt: "cinematic, film grain, dramatic lighting"
+  
+  fantasy:
+    lora: "style_fantasy_lora.safetensors"
+    strength_model: 0.7
+    strength_clip: 0.7
+    description: "Fantasy/magical style"
+    suggested_prompt: "fantasy, magical, ethereal atmosphere"
+
+# Motion Enhancement Presets
+motion:
+  smooth:
+    lora: "motion_smooth_lora.safetensors"
+    strength_model: 0.6
+    strength_clip: 0.6
+    description: "Smooth, fluid motion"
+  
+  dynamic:
+    lora: "motion_dynamic_lora.safetensors"
+    strength_model: 0.7
+    strength_clip: 0.7
+    description: "Dynamic, energetic motion"
+  
+  subtle:
+    lora: "motion_subtle_lora.safetensors"
+    strength_model: 0.5
+    strength_clip: 0.5
+    description: "Subtle, gentle motion"
+
+# Quality Enhancement Presets
+quality:
+  detail_enhancer:
+    lora: "detail_enhancer_lora.safetensors"
+    strength_model: 0.5
+    strength_clip: 0.5
+    description: "Enhances fine details"
+  
+  sharpness:
+    lora: "sharpness_lora.safetensors"
+    strength_model: 0.6
+    strength_clip: 0.6
+    description: "Increases image sharpness"
+  
+  clarity:
+    lora: "clarity_lora.safetensors"
+    strength_model: 0.55
+    strength_clip: 0.55
+    description: "Improves overall clarity"
+
+# Multi-LoRA Combinations
+combinations:
+  anime_character:
+    loras:
+      - name: "style_anime_lora.safetensors"
+        strength_model: 0.7
+        strength_clip: 0.7
+      - name: "character_consistency_lora.safetensors"
+        strength_model: 0.85
+        strength_clip: 0.85
+    description: "Anime style with character consistency"
+  
+  cinematic_smooth:
+    loras:
+      - name: "style_cinematic_lora.safetensors"
+        strength_model: 0.8
+        strength_clip: 0.8
+      - name: "motion_smooth_lora.safetensors"
+        strength_model: 0.6
+        strength_clip: 0.6
+    description: "Cinematic style with smooth motion"
+  
+  detailed_realistic:
+    loras:
+      - name: "style_realistic_lora.safetensors"
+        strength_model: 0.8
+        strength_clip: 0.8
+      - name: "detail_enhancer_lora.safetensors"
+        strength_model: 0.5
+        strength_clip: 0.5
+    description: "Realistic style with enhanced details"
+  
+  fantasy_character:
+    loras:
+      - name: "style_fantasy_lora.safetensors"
+        strength_model: 0.7
+        strength_clip: 0.7
+      - name: "character_consistency_lora.safetensors"
+        strength_model: 0.85
+        strength_clip: 0.85
+      - name: "detail_enhancer_lora.safetensors"
+        strength_model: 0.5
+        strength_clip: 0.5
+    description: "Fantasy style with consistent character and details"
